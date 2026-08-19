@@ -12,8 +12,8 @@
  * импортов из packages/ и никакой зависимости от node_modules.
  */
 
-import { readFileSync } from 'node:fs';
-import { relative, isAbsolute } from 'node:path';
+import { readFileSync, appendFileSync, mkdirSync } from 'node:fs';
+import { relative, isAbsolute, join } from 'node:path';
 import { checkOwnership } from './checks/ownership.js';
 import { REPO_ROOT, currentBranch, loadHeat, loadIntrusions } from './lib.js';
 
@@ -81,11 +81,30 @@ function sessionContext() {
   ].join('\n');
 }
 
+/**
+ * Журнал вызовов. Нужен не для аудита, а чтобы отличить «хук отказал» от
+ * «хук вообще не запустился»: upstream может в любой момент включить
+ * TrustedHooksManager, и тогда хуки умрут молча.
+ */
+function logCall(event, tool, path, decision) {
+  try {
+    const dir = join(REPO_ROOT, 'aso', '.cache');
+    mkdirSync(dir, { recursive: true });
+    appendFileSync(
+      join(dir, 'hook.log'),
+      `${new Date().toISOString()}\t${event}\t${tool}\t${path ?? '-'}\t${decision}\n`,
+    );
+  } catch {
+    // журнал не должен ломать работу агента
+  }
+}
+
 function main() {
   const input = readStdin();
   const event = input.hook_event_name ?? 'PreToolUse';
 
   if (event === 'SessionStart') {
+    logCall(event, '-', null, 'context');
     process.stdout.write(
       JSON.stringify({
         hookSpecificOutput: {
@@ -140,6 +159,7 @@ function main() {
   }
 
   const { ok, violations } = checkOwnership([path], { staged: true });
+  logCall(event, toolName, path, ok ? 'allow' : 'deny');
   if (ok) {
     allow();
     return;
