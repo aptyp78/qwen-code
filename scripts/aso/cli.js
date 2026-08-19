@@ -14,7 +14,11 @@
 
 import { checkOwnership, LADDER } from './checks/ownership.js';
 import { writeHeat } from './heat.js';
+import { existsSync, readFileSync, statSync } from 'node:fs';
+import { homedir } from 'node:os';
+import { join } from 'node:path';
 import {
+  REPO_ROOT as REPO_ROOT_LOCAL,
   bold,
   red,
   green,
@@ -287,6 +291,108 @@ function cmdIntrude(args) {
   return 0;
 }
 
+/**
+ * Проверка здоровья форка. Отвечает на вопрос «всё ли цело» — включая то,
+ * что ломается молча: умерший хук, вернувшееся автообновление, сборку под
+ * Node 20.
+ */
+function cmdDoctor() {
+  const home = homedir();
+  const problems = [];
+  const line = (okFlag, text, hint) => {
+    console.log(`  ${okFlag ? green('✓') : red('✗')} ${text}`);
+    if (!okFlag && hint) {
+      console.log(`      ${dim(hint)}`);
+      problems.push(text);
+    }
+  };
+
+  console.log('');
+  console.log(bold('Здоровье форка'));
+  console.log('');
+
+  // Автообновление: включённое молча заменит нашу сборку версией Qwen.
+  let autoUpdate = null;
+  try {
+    const s = JSON.parse(
+      readFileSync(join(home, '.qwen', 'settings.json'), 'utf8'),
+    );
+    autoUpdate = s.general?.enableAutoUpdate;
+  } catch {
+    /* конфига может не быть */
+  }
+  line(
+    autoUpdate === false,
+    `автообновление продукта: ${autoUpdate === false ? 'выключено' : String(autoUpdate)}`,
+    'включи выключение: general.enableAutoUpdate = false в ~/.qwen/settings.json',
+  );
+
+  // Каналы поставки.
+  const stable = join(home, '.qwen-aso', 'channels', 'stable');
+  let stableVersion = null;
+  try {
+    stableVersion = JSON.parse(
+      readFileSync(join(stable, 'release.json'), 'utf8'),
+    ).version;
+  } catch {
+    /* канал пуст */
+  }
+  line(
+    Boolean(stableVersion),
+    `канал stable: ${stableVersion ?? 'пуст'}`,
+    'собери и промоутни: node scripts/aso/release.js build && promote',
+  );
+
+  // Node в обёртке. Активная версия nvm на этой машине — 20.
+  const nodeLink = join(home, '.qwen-aso', 'node');
+  const nodeOk = existsSync(nodeLink);
+  line(
+    nodeOk,
+    `Node для обёрток: ${nodeOk ? 'прибит абсолютным путём' : 'не прибит'}`,
+    'node scripts/aso/release.js wrappers',
+  );
+
+  // Хуки: молчание отличается от отказа только по журналу.
+  const hookLog = join(REPO_ROOT_LOCAL, 'aso', '.cache', 'hook.log');
+  const hookFresh =
+    existsSync(hookLog) &&
+    Date.now() - statSync(hookLog).mtimeMs < 30 * 24 * 3600 * 1000;
+  line(
+    hookFresh,
+    `хуки в сессиях: ${hookFresh ? 'вызывались за последний месяц' : 'следов вызова нет'}`,
+    'upstream может включить TrustedHooksManager — тогда хуки умрут молча',
+  );
+
+  // Граница.
+  const ownership = loadOwnership();
+  const registry = loadIntrusions();
+  line(
+    registry.intrusions.length <= ownership.budget.maxFunctionalIntrusions,
+    `вторжений в upstream: ${registry.intrusions.length} при лимите ${ownership.budget.maxFunctionalIntrusions}`,
+    'форк дрейфует из мягкого в жёсткий',
+  );
+
+  // Отставание.
+  const base = gitSafe(['merge-base', 'upstream/main', 'HEAD']);
+  const behind = base
+    ? Number(gitSafe(['rev-list', '--count', `${base}..upstream/main`], '0'))
+    : 0;
+  line(
+    behind < 2000,
+    `отставание от upstream: ${behind} коммитов`,
+    'пора синхронизироваться: скилл /aso-sync',
+  );
+
+  console.log('');
+  console.log(
+    problems.length
+      ? red(`  Требует внимания: ${problems.length}`)
+      : green('  Всё цело'),
+  );
+  console.log('');
+  return problems.length ? 1 : 0;
+}
+
 const [, , command = 'brief', ...rest] = process.argv;
 const commands = {
   brief: cmdBrief,
@@ -294,6 +400,7 @@ const commands = {
   heat: cmdHeat,
   drift: cmdDrift,
   intrude: cmdIntrude,
+  doctor: cmdDoctor,
 };
 
 const handler = commands[command];
