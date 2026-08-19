@@ -1,0 +1,41 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "name": "aso-brief",
+            "command": "node $QWEN_PROJECT_DIR/scripts/aso/hook.js",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "^(edit|write_file|replace|notebook_edit)$",
+        "hooks": [
+          {
+            "type": "command",
+            "name": "aso-boundary-guard",
+            "command": "node $QWEN_PROJECT_DIR/scripts/aso/hook.js",
+            "timeout": 4000
+          }
+        ]
+      },
+      {
+        "matcher": "^run_shell_command$",
+        "hooks": [
+          {
+            "type": "command",
+            "name": "aso-branch-guard",
+            "command": "node $QWEN_PROJECT_DIR/scripts/aso/hook.js",
+            "timeout": 4000
+          }
+        ]
+      }
+    ]
+  }
+}
