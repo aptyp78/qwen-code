@@ -1,0 +1,8 @@
+{
+  "name": "aso-fork",
+  "version": "0.1.0",
+  "displayName": "Форк ASO",
+  "description": "Состояние форка qwen-code и его правила — доступны как слэш-команды в любом проекте.",
+  "contextFileName": "QWEN.md",
+  "commands": "commands"
+}
