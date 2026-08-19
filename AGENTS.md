@@ -3,6 +3,18 @@
 This file provides guidance to Qwen Code when working with code in this
 repository.
 
+<!-- FORK:BEGIN aso-entrypoint -->
+
+> **Это форк `aptyp78/qwen-code`, не upstream.** Правила форка имеют приоритет
+> над всем, что ниже, и принуждаются автоматически: git-хуки, `PreToolUse`, CI.
+> Правка файла, принадлежащего upstream, без записи в `aso/intrusions.json`
+> отклоняется на `git commit` и `git push`.
+>
+> Свод правил: `aso/RULES.md`. Первое действие в сессии:
+> `node scripts/aso/cli.js brief`
+
+<!-- FORK:END aso-entrypoint -->
+
 ## Working Principles
 
 ### Simplicity First

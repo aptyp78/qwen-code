@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "upstreamRef": "upstream/main",
+  "budget": {
+    "maxFunctionalIntrusions": 5,
+    "wiringFiles": [
+      ".gitignore",
+      ".gitattributes",
+      "CLAUDE.md",
+      "AGENTS.md",
+      ".husky/pre-commit"
+    ]
+  },
+  "zones": [
+    {
+      "id": "aso-meta",
+      "policy": "owner-only",
+      "why": "Файлы, описывающие сами правила. Агент, упёршийся в ворота, первым делом попытается отредактировать ворота — это самый частый способ, которым такие системы разваливаются.",
+      "globs": [
+        "aso/ownership.json",
+        "aso/intrusions.json",
+        "scripts/aso/**",
+        ".husky/**",
+        ".qwen/settings.json",
+        ".claude/settings.json",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "QWEN.md",
+        ".gitignore",
+        ".gitattributes"
+      ]
+    },
+    {
+      "id": "aso-owned",
+      "policy": "free",
+      "why": "Наша территория. Upstream её никогда не создаст, конфликтов не бывает в принципе.",
+      "globs": [
+        "aso/**",
+        ".qwen/rules/**",
+        ".qwen/skills/**",
+        ".qwen/agents/**",
+        ".qwen/commands/**",
+        ".qwen/e2e-tests/**",
+        ".claude/skills/**",
+        ".claude/commands/**",
+        ".claude/agents/**",
+        ".github/workflows/aso-*",
+        "docs/fork/**"
+      ]
+    },
+    {
+      "id": "cold-zones",
+      "policy": "additive",
+      "why": "Холодные подсистемы upstream: 0-46 правок за квартал. Новые файлы здесь почти не создают риска слияния — сюда кладём свою логику, если расширения не хватило.",
+      "globs": [
+        "packages/core/src/prompts/**",
+        "packages/core/src/mcp/**",
+        "packages/core/src/providers/**",
+        "packages/core/src/models/**",
+        "packages/core/src/hooks/**",
+        "packages/core/src/memory/**"
+      ]
+    },
+    {
+      "id": "upstream-hot",
+      "policy": "registered-anchored",
+      "why": "Файлы с 40+ касаниями upstream за квартал. Правка здесь конфликтует почти при каждом слиянии, поэтому только внутри якорей и в пределах лимита строк.",
+      "source": "heat",
+      "globs": []
+    },
+    {
+      "id": "upstream-default",
+      "policy": "registered",
+      "why": "Всё остальное принадлежит upstream.",
+      "globs": ["**"]
+    }
+  ]
+}

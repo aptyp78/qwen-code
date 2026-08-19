@@ -1,3 +1,9 @@
+# FORK:BEGIN aso-guard
+# Граница форка. Проверка идёт до линтеров: смысла причёсывать код, который
+# вообще нельзя было трогать, нет.
+node scripts/aso/cli.js check --staged || exit 1
+# FORK:END aso-guard
+
 npm run pre-commit || {
   echo ''
   echo '===================================================='

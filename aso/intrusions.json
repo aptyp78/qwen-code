@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "note": "Реестр вторжений в файлы upstream. Пусто — цель. Каждая запись обязана называть отвергнутые альтернативы и иметь срок годности.",
+  "schema": {
+    "id": "FI-NNNN",
+    "path": "путь к файлу upstream",
+    "anchor": "имя якоря FORK:BEGIN/END в коде",
+    "reason": "зачем это нужно, одним предложением",
+    "alternativesRejected": ["ступень лестницы — почему не подошла"],
+    "strategy": "extension | settings | hook-point | shim | patch | inline",
+    "maxLines": 20,
+    "approvedBy": "owner",
+    "approvedAt": "YYYY-MM-DD",
+    "expires": "YYYY-MM-DD",
+    "upstreamable": true
+  },
+  "intrusions": []
+}

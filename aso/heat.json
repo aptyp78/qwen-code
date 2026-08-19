@@ -1,0 +1,338 @@
+{
+  "generatedFrom": "upstream/main",
+  "generatedAt": "2026-08-19T09:20:19Z",
+  "upstreamHead": "8b2593d79b",
+  "windowDays": 90,
+  "threshold": 40,
+  "totalTouchedFiles": 7913,
+  "files": [
+    {
+      "path": "packages/web-shell/client/i18n.tsx",
+      "touches": 179
+    },
+    {
+      "path": "packages/web-shell/client/App.tsx",
+      "touches": 178
+    },
+    {
+      "path": "packages/core/src/config/config.ts",
+      "touches": 174
+    },
+    {
+      "path": "packages/cli/src/serve/server.test.ts",
+      "touches": 154
+    },
+    {
+      "path": "packages/cli/src/acp-integration/acpAgent.ts",
+      "touches": 140
+    },
+    {
+      "path": "packages/cli/src/acp-integration/session/Session.ts",
+      "touches": 138
+    },
+    {
+      "path": "packages/cli/src/config/settingsSchema.ts",
+      "touches": 131
+    },
+    {
+      "path": "packages/vscode-ide-companion/schemas/settings.schema.json",
+      "touches": 128
+    },
+    {
+      "path": "packages/cli/src/acp-integration/session/Session.test.ts",
+      "touches": 119
+    },
+    {
+      "path": "packages/cli/src/acp-integration/acpAgent.test.ts",
+      "touches": 119
+    },
+    {
+      "path": "packages/acp-bridge/src/bridge.ts",
+      "touches": 117
+    },
+    {
+      "path": "packages/sdk-typescript/src/daemon/types.ts",
+      "touches": 115
+    },
+    {
+      "path": "packages/cli/src/serve/server.ts",
+      "touches": 110
+    },
+    {
+      "path": ".github/workflows/qwen-autofix.yml",
+      "touches": 107
+    },
+    {
+      "path": "scripts/tests/qwen-autofix-workflow.test.js",
+      "touches": 107
+    },
+    {
+      "path": "packages/core/src/config/config.test.ts",
+      "touches": 106
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "touches": 104
+    },
+    {
+      "path": "packages/cli/src/serve/run-qwen-serve.ts",
+      "touches": 102
+    },
+    {
+      "path": "packages/core/src/skills/bundled/review/SKILL.md",
+      "touches": 101
+    },
+    {
+      "path": "packages/acp-bridge/src/bridge.test.ts",
+      "touches": 100
+    },
+    {
+      "path": "package-lock.json",
+      "touches": 100
+    },
+    {
+      "path": "docs/developers/qwen-serve-protocol.md",
+      "touches": 99
+    },
+    {
+      "path": "packages/web-shell/client/App.test.tsx",
+      "touches": 99
+    },
+    {
+      "path": "packages/sdk-typescript/src/daemon/DaemonClient.ts",
+      "touches": 97
+    },
+    {
+      "path": "docs/users/configuration/settings.md",
+      "touches": 88
+    },
+    {
+      "path": "packages/acp-bridge/src/bridgeTypes.ts",
+      "touches": 87
+    },
+    {
+      "path": "packages/sdk-typescript/src/daemon/index.ts",
+      "touches": 81
+    },
+    {
+      "path": "packages/sdk-typescript/test/unit/DaemonClient.test.ts",
+      "touches": 79
+    },
+    {
+      "path": "packages/cli/src/config/config.ts",
+      "touches": 79
+    },
+    {
+      "path": "packages/core/src/core/client.ts",
+      "touches": 78
+    },
+    {
+      "path": "packages/cli/src/ui/AppContainer.tsx",
+      "touches": 76
+    },
+    {
+      "path": "package.json",
+      "touches": 76
+    },
+    {
+      "path": "packages/cli/src/serve/routes/session.ts",
+      "touches": 75
+    },
+    {
+      "path": "packages/cli/src/i18n/locales/en.js",
+      "touches": 75
+    },
+    {
+      "path": "packages/cli/src/i18n/locales/zh-TW.js",
+      "touches": 75
+    },
+    {
+      "path": "packages/cli/src/i18n/locales/zh.js",
+      "touches": 75
+    },
+    {
+      "path": "packages/webui/src/daemon/session/DaemonSessionProvider.tsx",
+      "touches": 72
+    },
+    {
+      "path": "packages/cli/src/serve/run-qwen-serve.test.ts",
+      "touches": 72
+    },
+    {
+      "path": "packages/cli/src/ui/hooks/useGeminiStream.ts",
+      "touches": 70
+    },
+    {
+      "path": "packages/webui/src/daemon/session/DaemonSessionProvider.test.tsx",
+      "touches": 69
+    },
+    {
+      "path": "packages/core/src/core/coreToolScheduler.ts",
+      "touches": 69
+    },
+    {
+      "path": "packages/cli/src/serve/capabilities.ts",
+      "touches": 67
+    },
+    {
+      "path": "packages/core/src/core/client.test.ts",
+      "touches": 66
+    },
+    {
+      "path": "packages/cli/package.json",
+      "touches": 65
+    },
+    {
+      "path": ".github/workflows/qwen-triage.yml",
+      "touches": 62
+    },
+    {
+      "path": "packages/core/src/core/coreToolScheduler.test.ts",
+      "touches": 62
+    },
+    {
+      "path": "packages/core/src/core/geminiChat.ts",
+      "touches": 62
+    },
+    {
+      "path": "integration-tests/cli/qwen-serve-routes.test.ts",
+      "touches": 61
+    },
+    {
+      "path": "packages/core/src/tools/agent/agent.ts",
+      "touches": 61
+    },
+    {
+      "path": "docs/users/qwen-serve.md",
+      "touches": 61
+    },
+    {
+      "path": "packages/cli/src/ui/hooks/useGeminiStream.test.tsx",
+      "touches": 59
+    },
+    {
+      "path": ".github/workflows/qwen-code-pr-review.yml",
+      "touches": 58
+    },
+    {
+      "path": "packages/web-shell/client/components/ChatEditor.tsx",
+      "touches": 57
+    },
+    {
+      "path": "packages/core/src/core/geminiChat.test.ts",
+      "touches": 57
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "touches": 57
+    },
+    {
+      "path": "packages/core/package.json",
+      "touches": 55
+    },
+    {
+      "path": "packages/web-shell/client/components/sidebar/WebShellSidebar.tsx",
+      "touches": 54
+    },
+    {
+      "path": "packages/web-shell/client/components/MessageList.tsx",
+      "touches": 53
+    },
+    {
+      "path": "packages/core/src/tools/agent/agent.test.ts",
+      "touches": 52
+    },
+    {
+      "path": "packages/acp-bridge/package.json",
+      "touches": 52
+    },
+    {
+      "path": "packages/acp-bridge/src/status.ts",
+      "touches": 51
+    },
+    {
+      "path": "packages/channels/base/src/ChannelBase.ts",
+      "touches": 50
+    },
+    {
+      "path": "packages/cli/src/commands/review/compose-review.ts",
+      "touches": 48
+    },
+    {
+      "path": "packages/web-shell/client/components/ChatPane.tsx",
+      "touches": 48
+    },
+    {
+      "path": "packages/sdk-typescript/src/index.ts",
+      "touches": 47
+    },
+    {
+      "path": "packages/sdk-typescript/scripts/build.js",
+      "touches": 47
+    },
+    {
+      "path": "packages/cli/src/commands/review/compose-review.test.ts",
+      "touches": 46
+    },
+    {
+      "path": "packages/cli/src/serve/acp-http/transport.test.ts",
+      "touches": 45
+    },
+    {
+      "path": "packages/vscode-ide-companion/package.json",
+      "touches": 45
+    },
+    {
+      "path": "packages/channels/base/src/ChannelBase.test.ts",
+      "touches": 45
+    },
+    {
+      "path": "packages/web-shell/package.json",
+      "touches": 44
+    },
+    {
+      "path": "packages/web-shell/client/App.module.css",
+      "touches": 44
+    },
+    {
+      "path": "packages/webui/src/daemon/session/actions.ts",
+      "touches": 44
+    },
+    {
+      "path": "packages/cli/src/nonInteractiveCli.ts",
+      "touches": 44
+    },
+    {
+      "path": "packages/webui/src/daemon/session/types.ts",
+      "touches": 43
+    },
+    {
+      "path": "packages/cli/src/commands/review/agent-prompt.test.ts",
+      "touches": 41
+    },
+    {
+      "path": "packages/cli/src/gemini.tsx",
+      "touches": 41
+    },
+    {
+      "path": "packages/core/src/services/chatRecordingService.ts",
+      "touches": 40
+    },
+    {
+      "path": "packages/channels/dingtalk/package.json",
+      "touches": 40
+    },
+    {
+      "path": "packages/channels/telegram/package.json",
+      "touches": 40
+    },
+    {
+      "path": "packages/channels/weixin/package.json",
+      "touches": 40
+    },
+    {
+      "path": "packages/webui/package.json",
+      "touches": 40
+    }
+  ]
+}
