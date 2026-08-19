@@ -26,12 +26,18 @@ allowedTools: [run_shell_command, read_file, edit, grep_search, glob]
 1. Дерево чистое, ветка `dev`. Обновить карту горячих файлов:
    `node scripts/aso/cli.js heat`
 2. `git fetch upstream --tags`
-3. Выбрать цель: последний стабильный тег `vX.Y.Z` (не `-nightly`, не
-   `-preview`), которому **не меньше пяти дней** — оригинал успевает выкатить
-   исправления:
-   `git tag -l 'v*' --sort=-creatordate --format='%(creatordate:short) %(refname:short)' | grep -Ev 'nightly|preview' | head -5`
-4. Зеркалим: `git branch -f main <тег>`
-5. Ветка слияния: `git switch -c sync/<версия> dev`, затем `git merge <тег>`
+3. Выбрать цель: `node scripts/aso/cli.js target`
+
+   Команда берёт самый свежий коммит `upstream/main`, которому **не меньше
+   пяти дней** — оригинал успевает выкатить свои же исправления. Если она
+   говорит «нечего сливать» — значит нечего, и это нормально.
+
+   **Не сливать на релизные теги `vX.Y.Z`.** Проверено 2026-08-19: они лежат
+   на отдельных ветках `release/vX.Y.Z` и недостижимы из `main`; слияние
+   притащит расходящуюся ветку. Подробности в `aso/UPSTREAM-LOG.md`.
+
+4. Зеркалим: `git branch -f main <sha цели>`
+5. Ветка слияния: `git switch -c sync/<дата> dev`, затем `git merge <sha цели>`
 6. **Конфликты.** Файл, которого нет в `aso/intrusions.json`, конфликтовать не
    должен. Если конфликтует — значит реестр врёт: `git merge --abort`,
    остановиться и доложить владельцу. Это не задача на разбор руками.
@@ -44,7 +50,7 @@ allowedTools: [run_shell_command, read_file, edit, grep_search, glob]
 9. Записать итог в `aso/UPSTREAM-LOG.md`: дата, версия, сколько конфликтов, что
    решили, что сломалось. Это единственная память между сессиями агентов о том,
    как разрешались конфликты.
-10. Слить `sync/<версия>` в `dev` **только merge**, без fast-forward.
+10. Слить `sync/<дата>` в `dev` **только merge**, без fast-forward.
 
 ## Когда останавливаться
 
