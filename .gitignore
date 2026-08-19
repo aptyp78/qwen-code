@@ -139,3 +139,31 @@ tmp/
 # Auto-generated computer-use marker can also appear under nested packages.
 **/.qwen/computer-use/
 .playwright-mcp/
+
+# FORK:BEGIN aso-tracked-config
+# Форк aptyp78/qwen-code. Файлы политики форка обязаны быть в git: правило,
+# которое не переживает клон и смену сессии агента, правилом не является.
+# Порядок важен — git применяет последнее совпавшее правило.
+!.qwen/rules/
+!.qwen/rules/**
+!.qwen/settings.json
+!.qwen/hooks/
+!.qwen/hooks/**
+!.qwen/e2e-tests/
+!.qwen/e2e-tests/**
+!.qwen/specs/
+!.qwen/specs/**
+# .claude исключён как каталог выше, поэтому вернуть отдельный файл внутри
+# него нельзя без предварительного возврата самого каталога.
+!.claude/
+.claude/*
+!.claude/settings.json
+!.claude/skills/
+!.claude/skills/**
+!.claude/commands/
+!.claude/commands/**
+!.claude/agents/
+!.claude/agents/**
+# Рабочий кеш скриптов форка в git не нужен.
+aso/.cache/
+# FORK:END aso-tracked-config

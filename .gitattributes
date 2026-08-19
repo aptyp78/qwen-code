@@ -25,3 +25,13 @@ scripts/installation/install-qwen-standalone.bat text eol=crlf
 *.eot binary
 *.ttf binary
 *.otf binary
+
+# FORK:BEGIN aso-merge-drivers
+# .gitignore правится upstream ~34 раза за полгода и мы тоже его правим —
+# union склеивает строки обеих сторон вместо конфликта.
+.gitignore      merge=union
+.prettierignore merge=union
+# Каталог форка целиком наш: при слиянии всегда берём свою версию.
+aso/**          merge=ours
+scripts/aso/**  merge=ours
+# FORK:END aso-merge-drivers
