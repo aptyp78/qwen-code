@@ -19,6 +19,7 @@ import { homedir } from 'node:os';
 import { join } from 'node:path';
 import {
   REPO_ROOT as REPO_ROOT_LOCAL,
+  git,
   bold,
   red,
   green,
@@ -393,6 +394,86 @@ function cmdDoctor() {
   return problems.length ? 1 : 0;
 }
 
+/**
+ * Цель следующего слияния.
+ *
+ * Исходно правило звучало «синхронизироваться на релизный тег». Проверка на
+ * месте показала, что у upstream теги релизов лежат на отдельных ветках
+ * `release/vX.Y.Z` и недостижимы из `main`, — форк, идущий за главной веткой,
+ * слиться на них не может. Замысел выдержки при этом остаётся верным: берём
+ * самый свежий коммит главной ветки, которому уже есть N дней, чтобы Qwen
+ * успел выкатить свои же исправления.
+ */
+function cmdTarget(args) {
+  const soakArg = args.find((a) => a.startsWith('--soak-days='));
+  const soakDays = soakArg ? Number(soakArg.split('=')[1]) : 5;
+  const ref = 'upstream/main';
+  const base = gitSafe(['merge-base', ref, 'HEAD']);
+
+  const cutoff = new Date(Date.now() - soakDays * 24 * 3600 * 1000);
+  const sha = gitSafe([
+    'rev-list',
+    '-1',
+    `--before=${cutoff.toISOString()}`,
+    ref,
+  ]);
+
+  const ahead = base
+    ? Number(gitSafe(['rev-list', '--count', `${base}..${ref}`], '0'))
+    : 0;
+
+  console.log('');
+  console.log(bold('Цель следующего слияния'));
+  console.log('');
+  console.log(`  выдержка          ${soakDays} дней`);
+  console.log(
+    `  наша база         ${gitSafe(['log', '-1', '--format=%h %cs', base])}`,
+  );
+  console.log(
+    `  upstream/main     ${gitSafe(['log', '-1', '--format=%h %cs', ref])}`,
+  );
+  console.log(`  доступно новых    ${ahead} коммитов`);
+  console.log('');
+
+  if (
+    !sha ||
+    (base && gitSafe(['merge-base', '--is-ancestor', sha, base], 'x') === '')
+  ) {
+    const isOld = base
+      ? (() => {
+          try {
+            git(['merge-base', '--is-ancestor', sha, base], { quiet: true });
+            return true;
+          } catch {
+            return false;
+          }
+        })()
+      : false;
+    if (!sha || isOld) {
+      console.log(
+        `  ${yellow('•')} Нечего сливать: всё, что старше ${soakDays} дней, у нас уже есть.`,
+      );
+      console.log(
+        dim(
+          '    Это нормально сразу после форка — подожди, пока новые коммиты отлежатся.',
+        ),
+      );
+      console.log('');
+      return 0;
+    }
+  }
+
+  console.log(
+    `  ${green('→')} цель: ${gitSafe(['log', '-1', '--format=%h %cs %s', sha])}`,
+  );
+  console.log('');
+  console.log(
+    dim('    git switch -c sync/$(date +%Y%m%d) dev && git merge ' + sha),
+  );
+  console.log('');
+  return 0;
+}
+
 const [, , command = 'brief', ...rest] = process.argv;
 const commands = {
   brief: cmdBrief,
@@ -401,6 +482,7 @@ const commands = {
   drift: cmdDrift,
   intrude: cmdIntrude,
   doctor: cmdDoctor,
+  target: cmdTarget,
 };
 
 const handler = commands[command];
