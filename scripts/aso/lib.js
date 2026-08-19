@@ -134,6 +134,21 @@ export function stagedFiles() {
     .filter(Boolean);
 }
 
+/**
+ * Существует ли файл в базе upstream. Если нет — он наш собственный, и
+ * конфликтовать при слиянии нечему. Это единственный честный признак: список
+ * «наших» путей устаревает, а факт отсутствия у upstream — нет.
+ */
+export function existsAtBase(path, base) {
+  if (!base) return true;
+  try {
+    git(['cat-file', '-e', `${base}:${path}`], { quiet: true });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function currentBranch() {
   return gitSafe(['rev-parse', '--abbrev-ref', 'HEAD'], 'HEAD');
 }

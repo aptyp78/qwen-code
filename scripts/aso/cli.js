@@ -28,6 +28,8 @@ import {
   loadIntrusions,
   loadHeat,
   matches,
+  mergeBase,
+  existsAtBase,
 } from './lib.js';
 
 const PROTECTED_BRANCHES = ['main', 'stable'];
@@ -112,13 +114,24 @@ function cmdDrift() {
       matches(p, '.github/workflows/aso-*'),
   );
   const wiringTouched = changed.filter((p) => wiring.includes(p));
+  const base = mergeBase();
+  // Файл, которого нет у upstream, — наш собственный: конфликтовать нечему,
+  // вторжением он не является, где бы ни лежал.
+  const ownNewFiles = changed.filter(
+    (p) =>
+      !ours.includes(p) && !wiringTouched.includes(p) && !existsAtBase(p, base),
+  );
   const functional = changed.filter(
-    (p) => !ours.includes(p) && !wiringTouched.includes(p),
+    (p) =>
+      !ours.includes(p) &&
+      !wiringTouched.includes(p) &&
+      !ownNewFiles.includes(p),
   );
 
   console.log(bold('Фактическая дельта форка против upstream'));
   console.log('');
   console.log(`  наше (свои каталоги):      ${ours.length} файлов`);
+  console.log(`  наши новые файлы:          ${ownNewFiles.length}`);
   console.log(
     `  служебные швы:             ${wiringTouched.length} из ${wiring.length}`,
   );

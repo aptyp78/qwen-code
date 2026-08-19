@@ -13,8 +13,11 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import {
+  ASO_DIR,
   REPO_ROOT,
   gitSafe,
+  existsAtBase,
+  readJson,
   loadOwnership,
   loadIntrusions,
   loadHeat,
@@ -108,7 +111,10 @@ function grantsChanged(paths, ctx) {
     const before = readAt('HEAD', 'aso/ownership.json');
     // Файла ещё не было — это установка механизма, а не расширение прав.
     if (before) {
-      const after = loadOwnership();
+      // Сравниваем сохранённое с сохранённым: loadOwnership() подставляет
+      // globs горячей зоны из карты, и сравнение с ним всегда давало бы
+      // ложное «политика изменилась».
+      const after = readJson(join(ASO_DIR, 'ownership.json'));
       const strip = (o) =>
         JSON.stringify(o.zones.map((z) => [z.id, z.policy, z.globs]));
       if (strip(before) !== strip(after)) return true;
@@ -164,10 +170,15 @@ export function checkOwnership(paths, opts = {}) {
 
       case 'owner-only': {
         if (process.env.ASO_META === '1') break;
-        // Учредительные швы уже приняты владельцем: в режиме полной дельты они
-        // не должны срабатывать вечно. Новая правка того же файла проверяется
-        // в staged-режиме и по-прежнему требует осознанного ASO_META=1.
-        if (!ctx.staged && ownership.budget.wiringFiles.includes(path)) break;
+        // В режиме полной дельты зона meta не должна срабатывать вечно на том,
+        // о чём уже договорились. Файл, которого у upstream нет, конфликтовать
+        // не может — это наш собственный, а не шов. Учредительные швы в чужих
+        // файлах перечислены явно. Новая правка любого из них ловится в
+        // staged-режиме и по-прежнему требует осознанного ASO_META=1.
+        if (!ctx.staged) {
+          const isOurs = !existsAtBase(path, ctx.base);
+          if (isOurs || ownership.budget.wiringFiles.includes(path)) break;
+        }
         violations.push({
           path,
           zone: zone.id,
