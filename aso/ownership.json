@@ -37,6 +37,7 @@
       "globs": [
         "aso/**",
         ".qwen/rules/**",
+        ".qwen/hooks/**",
         ".qwen/skills/**",
         ".qwen/agents/**",
         ".qwen/commands/**",
