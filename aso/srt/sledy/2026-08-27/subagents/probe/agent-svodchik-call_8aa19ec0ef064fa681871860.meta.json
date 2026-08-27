@@ -1,0 +1,29 @@
+{
+  "agentId": "svodchik-call_8aa19ec0ef064fa681871860",
+  "agentType": "svodchik",
+  "description": "Свести факты из data.txt",
+  "parentSessionId": "b4c12e0c-cdac-43a3-9457-85455cf1aea0",
+  "toolUseId": "call_8aa19ec0ef064fa681871860",
+  "parentAgentId": null,
+  "createdAt": "2026-08-26T09:14:54.197Z",
+  "status": "completed",
+  "isBackgrounded": false,
+  "lastUpdatedAt": "2026-08-26T09:15:09.574Z",
+  "resolvedApprovalMode": "yolo",
+  "persistedCliFlags": {
+    "approvalMode": "yolo",
+    "bare": false,
+    "safeMode": false,
+    "sandbox": null,
+    "screenReader": false,
+    "model": "qwen3.8-max",
+    "authType": "openai",
+    "baseUrl": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+    "maxSessionTurns": -1,
+    "maxToolCalls": -1,
+    "maxSubagentDepth": 5
+  },
+  "subagentName": "svodchik",
+  "resumeCount": 0,
+  "depth": 0
+}

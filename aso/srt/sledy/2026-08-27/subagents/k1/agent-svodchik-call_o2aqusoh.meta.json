@@ -1,0 +1,30 @@
+{
+  "agentId": "svodchik-call_o2aqusoh",
+  "agentType": "svodchik",
+  "description": "Calculate project budget from data.txt",
+  "parentSessionId": "00bcaf2d-280d-4a79-94a8-cd008ff9042c",
+  "toolUseId": "call_o2aqusoh",
+  "parentAgentId": null,
+  "createdAt": "2026-08-27T11:07:50.781Z",
+  "status": "completed",
+  "isBackgrounded": true,
+  "lastUpdatedAt": "2026-08-27T11:08:11.096Z",
+  "resolvedApprovalMode": "yolo",
+  "persistedCliFlags": {
+    "approvalMode": "yolo",
+    "bare": false,
+    "safeMode": false,
+    "sandbox": null,
+    "screenReader": false,
+    "model": "gemma4:12b-mlx",
+    "authType": "openai",
+    "baseUrl": "http://localhost:11434/v1",
+    "maxSessionTurns": -1,
+    "maxToolCalls": -1,
+    "maxSubagentDepth": 5
+  },
+  "subagentName": "svodchik",
+  "resumeCount": 0,
+  "depth": 0,
+  "model": "gemma4:12b-mlx"
+}

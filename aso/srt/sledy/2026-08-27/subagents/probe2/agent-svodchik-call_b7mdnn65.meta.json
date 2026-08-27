@@ -1,0 +1,30 @@
+{
+  "agentId": "svodchik-call_b7mdnn65",
+  "agentType": "svodchik",
+  "description": "Read data.txt and extract project budget and responsible person",
+  "parentSessionId": "782a69bd-d2f9-4e11-81bd-510d95c548c1",
+  "toolUseId": "call_b7mdnn65",
+  "parentAgentId": null,
+  "createdAt": "2026-08-27T10:23:44.552Z",
+  "status": "completed",
+  "isBackgrounded": true,
+  "lastUpdatedAt": "2026-08-27T10:25:49.599Z",
+  "resolvedApprovalMode": "yolo",
+  "persistedCliFlags": {
+    "approvalMode": "yolo",
+    "bare": false,
+    "safeMode": false,
+    "sandbox": null,
+    "screenReader": false,
+    "model": "gemma4:12b-mlx",
+    "authType": "openai",
+    "baseUrl": "http://localhost:11434/v1",
+    "maxSessionTurns": -1,
+    "maxToolCalls": -1,
+    "maxSubagentDepth": 5
+  },
+  "subagentName": "svodchik",
+  "resumeCount": 0,
+  "depth": 0,
+  "model": "gemma4:12b-mlx"
+}

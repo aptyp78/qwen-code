@@ -1,0 +1,30 @@
+{
+  "agentId": "prostoy-call_4ontz2ea",
+  "agentType": "prostoy",
+  "description": "Read data.txt and state project status",
+  "parentSessionId": "f0aa923e-fdb9-43e0-a7cd-6e3110ad3be8",
+  "toolUseId": "call_4ontz2ea",
+  "parentAgentId": null,
+  "createdAt": "2026-08-27T14:05:49.116Z",
+  "status": "completed",
+  "isBackgrounded": true,
+  "lastUpdatedAt": "2026-08-27T14:06:05.409Z",
+  "resolvedApprovalMode": "yolo",
+  "persistedCliFlags": {
+    "approvalMode": "yolo",
+    "bare": false,
+    "safeMode": false,
+    "sandbox": null,
+    "screenReader": false,
+    "model": "gemma4:12b-mlx",
+    "authType": "openai",
+    "baseUrl": "http://localhost:11434/v1",
+    "maxSessionTurns": -1,
+    "maxToolCalls": -1,
+    "maxSubagentDepth": 5
+  },
+  "subagentName": "prostoy",
+  "resumeCount": 0,
+  "depth": 0,
+  "model": "gemma4:12b-mlx"
+}

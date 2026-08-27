@@ -1,0 +1,30 @@
+{
+  "agentId": "svodchik2-call_5ulfv7n0",
+  "agentType": "svodchik2",
+  "description": "Read data.txt and report project status",
+  "parentSessionId": "e0df4a50-e062-47ac-8b40-a681714d1743",
+  "toolUseId": "call_5ulfv7n0",
+  "parentAgentId": null,
+  "createdAt": "2026-08-27T10:17:55.588Z",
+  "status": "running",
+  "isBackgrounded": true,
+  "lastUpdatedAt": "2026-08-27T10:19:24.272Z",
+  "resolvedApprovalMode": "yolo",
+  "persistedCliFlags": {
+    "approvalMode": "yolo",
+    "bare": false,
+    "safeMode": false,
+    "sandbox": null,
+    "screenReader": false,
+    "model": "gemma4:12b-mlx",
+    "authType": "openai",
+    "baseUrl": "http://localhost:11434/v1",
+    "maxSessionTurns": -1,
+    "maxToolCalls": -1,
+    "maxSubagentDepth": 5
+  },
+  "subagentName": "svodchik2",
+  "resumeCount": 0,
+  "depth": 0,
+  "model": "gemma4:12b-mlx"
+}

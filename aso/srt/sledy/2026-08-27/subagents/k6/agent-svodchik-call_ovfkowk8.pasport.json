@@ -1,0 +1,19 @@
+{
+  "позиция": "svodchik",
+  "агент": "svodchik-call_ovfkowk8",
+  "родительскаяСессия": "9208647d-f266-4f39-a9c5-75bfd361c217",
+  "время": "2026-08-27T14:15:50.753Z",
+  "рамка": {
+    "обязанностьИзОпределения": "Ты сводишь факты. Кратко.",
+    "обязанностиОтМашины": ["node .qwen/hooks/priyomka.mjs"]
+  },
+  "средства": {
+    "инструментыРазрешены": "read_file",
+    "корпус": "/private/tmp/claude-501/-Users-arturoceretnyj/1dfade30-2415-4673-82b8-bef1501dc860/scratchpad/k6/.qwen/agents/svodchik.md"
+  },
+  "машина": {
+    "модель": "gemma4:12b-mlx",
+    "адрес": "http://localhost:11434/v1"
+  },
+  "хешОпределения": "caa95df3192b"
+}

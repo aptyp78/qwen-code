@@ -1,0 +1,30 @@
+{
+  "agentId": "svodchik-call_v0py4xif",
+  "agentType": "svodchik",
+  "description": "Read data.txt to identify project name and status",
+  "parentSessionId": "3456124e-c086-4a22-8764-d853c397587f",
+  "toolUseId": "call_v0py4xif",
+  "parentAgentId": null,
+  "createdAt": "2026-08-27T10:45:06.651Z",
+  "status": "completed",
+  "isBackgrounded": true,
+  "lastUpdatedAt": "2026-08-27T10:45:30.262Z",
+  "resolvedApprovalMode": "yolo",
+  "persistedCliFlags": {
+    "approvalMode": "yolo",
+    "bare": false,
+    "safeMode": false,
+    "sandbox": null,
+    "screenReader": false,
+    "model": "gemma4:12b-mlx",
+    "authType": "openai",
+    "baseUrl": "http://localhost:11434/v1",
+    "maxSessionTurns": -1,
+    "maxToolCalls": -1,
+    "maxSubagentDepth": 5
+  },
+  "subagentName": "svodchik",
+  "resumeCount": 0,
+  "depth": 0,
+  "model": "gemma4:12b-mlx"
+}

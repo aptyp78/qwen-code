@@ -1,0 +1,29 @@
+{
+  "agentId": "svodchik2-call_92bad5131a5040aa8a33eb56",
+  "agentType": "svodchik2",
+  "description": "Прочитать data.txt, дать статус",
+  "parentSessionId": "9929e938-7215-4548-b35c-71a109ae56fd",
+  "toolUseId": "call_92bad5131a5040aa8a33eb56",
+  "parentAgentId": null,
+  "createdAt": "2026-08-26T09:18:07.239Z",
+  "status": "completed",
+  "isBackgrounded": false,
+  "lastUpdatedAt": "2026-08-26T09:18:14.299Z",
+  "resolvedApprovalMode": "yolo",
+  "persistedCliFlags": {
+    "approvalMode": "yolo",
+    "bare": false,
+    "safeMode": false,
+    "sandbox": null,
+    "screenReader": false,
+    "model": "qwen3.8-max",
+    "authType": "openai",
+    "baseUrl": "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+    "maxSessionTurns": -1,
+    "maxToolCalls": -1,
+    "maxSubagentDepth": 5
+  },
+  "subagentName": "svodchik2",
+  "resumeCount": 0,
+  "depth": 0
+}

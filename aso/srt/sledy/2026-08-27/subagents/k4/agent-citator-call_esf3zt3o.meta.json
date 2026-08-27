@@ -1,0 +1,30 @@
+{
+  "agentId": "citator-call_esf3zt3o",
+  "agentType": "citator",
+  "description": "Read data.txt and identify project status",
+  "parentSessionId": "0cbbf4da-188a-4d63-9d42-96f94ea209a0",
+  "toolUseId": "call_esf3zt3o",
+  "parentAgentId": null,
+  "createdAt": "2026-08-27T14:07:29.450Z",
+  "status": "completed",
+  "isBackgrounded": true,
+  "lastUpdatedAt": "2026-08-27T14:07:54.630Z",
+  "resolvedApprovalMode": "yolo",
+  "persistedCliFlags": {
+    "approvalMode": "yolo",
+    "bare": false,
+    "safeMode": false,
+    "sandbox": null,
+    "screenReader": false,
+    "model": "gemma4:12b-mlx",
+    "authType": "openai",
+    "baseUrl": "http://localhost:11434/v1",
+    "maxSessionTurns": -1,
+    "maxToolCalls": -1,
+    "maxSubagentDepth": 5
+  },
+  "subagentName": "citator",
+  "resumeCount": 0,
+  "depth": 0,
+  "model": "gemma4:12b-mlx"
+}

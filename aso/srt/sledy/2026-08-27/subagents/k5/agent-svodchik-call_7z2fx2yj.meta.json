@@ -1,0 +1,30 @@
+{
+  "agentId": "svodchik-call_7z2fx2yj",
+  "agentType": "svodchik",
+  "description": "Read data.txt to identify the department name.",
+  "parentSessionId": "aede6ea5-0d1b-4c81-a975-8b912d825b6d",
+  "toolUseId": "call_7z2fx2yj",
+  "parentAgentId": null,
+  "createdAt": "2026-08-27T14:11:27.128Z",
+  "status": "completed",
+  "isBackgrounded": true,
+  "lastUpdatedAt": "2026-08-27T14:11:45.585Z",
+  "resolvedApprovalMode": "yolo",
+  "persistedCliFlags": {
+    "approvalMode": "yolo",
+    "bare": false,
+    "safeMode": false,
+    "sandbox": null,
+    "screenReader": false,
+    "model": "gemma4:12b-mlx",
+    "authType": "openai",
+    "baseUrl": "http://localhost:11434/v1",
+    "maxSessionTurns": -1,
+    "maxToolCalls": -1,
+    "maxSubagentDepth": 5
+  },
+  "subagentName": "svodchik",
+  "resumeCount": 0,
+  "depth": 0,
+  "model": "gemma4:12b-mlx"
+}

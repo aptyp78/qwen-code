@@ -1,0 +1,30 @@
+{
+  "agentId": "svodchik-call_qv4akvmc",
+  "agentType": "svodchik",
+  "description": "Read data.txt and summarize its status.",
+  "parentSessionId": "3a56db73-fd31-4b81-a431-a47682b9ee10",
+  "toolUseId": "call_qv4akvmc",
+  "parentAgentId": null,
+  "createdAt": "2026-08-27T14:01:59.277Z",
+  "status": "completed",
+  "isBackgrounded": true,
+  "lastUpdatedAt": "2026-08-27T14:02:16.353Z",
+  "resolvedApprovalMode": "yolo",
+  "persistedCliFlags": {
+    "approvalMode": "yolo",
+    "bare": false,
+    "safeMode": false,
+    "sandbox": null,
+    "screenReader": false,
+    "model": "gemma4:12b-mlx",
+    "authType": "openai",
+    "baseUrl": "http://localhost:11434/v1",
+    "maxSessionTurns": -1,
+    "maxToolCalls": -1,
+    "maxSubagentDepth": 5
+  },
+  "subagentName": "svodchik",
+  "resumeCount": 0,
+  "depth": 0,
+  "model": "gemma4:12b-mlx"
+}
