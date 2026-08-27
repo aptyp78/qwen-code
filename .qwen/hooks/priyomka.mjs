@@ -67,6 +67,11 @@ const ПРАВИЛА = {
   },
 };
 
+// Выключатель: ASO_PRIYOMKA=off снимает приёмку, не трогая настройки.
+// Нужен на случай, когда приёмка мешает срочной работе: править settings.json
+// под нагрузкой — верный способ оставить его сломанным.
+if ((process.env.ASO_PRIYOMKA ?? '').toLowerCase() === 'off') process.exit(0);
+
 let сырое = '';
 process.stdin.on('data', (c) => (сырое += c));
 process.stdin.on('end', () => {
@@ -80,14 +85,17 @@ process.stdin.on('end', () => {
   // Позиция не объявила правила — приёмка не вмешивается.
   if (!правило) {
     if (имяПравила) appendFileSync(ЖУРНАЛ,
-      `${new Date().toISOString()}\t${вход.agent_type}\tПРОПУЩЕНО\tнеизвестное правило «${имяПравила}»\n`);
+      `${new Date().toISOString()}\t${вход.agent_id ?? '?'}\t${вход.agent_type}\tПРОПУЩЕНО\tнеизвестное правило «${имяПравила}»\n`);
     process.exit(0);
   }
 
   const материал = вход.agent_transcript_path ? материалИзЖурнала(вход.agent_transcript_path) : '';
   const итог = правило(вход.last_assistant_message ?? '', материал);
 
-  appendFileSync(ЖУРНАЛ, `${new Date().toISOString()}\t${вход.agent_type}\t${имяПравила}\t` +
+  // agent_id обязателен: сверка «правило объявлено, а приёмка не отработала»
+  // по типу позиции даёт ложное благополучие — след от другого запуска той же
+  // позиции засчитывается за этот.
+  appendFileSync(ЖУРНАЛ, `${new Date().toISOString()}\t${вход.agent_id ?? '?'}\t${вход.agent_type}\t${имяПравила}\t` +
     `${итог.принято ? 'ПРИНЯТО' : 'ОТКЛОНЕНО'}\t${итог.причина.slice(0, 110).replace(/\n/g, ' ')}\n`);
 
   if (итог.принято) process.exit(0);
