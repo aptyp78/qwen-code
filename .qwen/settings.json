@@ -36,6 +36,30 @@
           }
         ]
       }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "name": "aso-pasport",
+            "command": "node $QWEN_PROJECT_DIR/.qwen/hooks/pasport.mjs",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "name": "aso-priyomka",
+            "command": "node $QWEN_PROJECT_DIR/.qwen/hooks/priyomka.mjs",
+            "timeout": 10000
+          }
+        ]
+      }
     ]
   },
   "$version": 4
