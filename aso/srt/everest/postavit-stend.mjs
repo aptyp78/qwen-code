@@ -10,7 +10,7 @@
  * Следы прогона при этом не теряются: паспорта и приёмка пишутся в
  * ~/.qwen/projects/**, то есть в домашний каталог, а не во временный.
  */
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, symlinkSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { homedir } from 'node:os';
 
@@ -26,9 +26,19 @@ if (!existsSync(ФРАГМЕНТЫ)) {
 mkdirSync(join(СТЕНД, '.qwen', 'agents'), { recursive: true });
 mkdirSync(join(СТЕНД, 'otryvki'), { recursive: true });
 
-// Позиция копируется из репозитория: там её канон, здесь рабочая копия.
-copyFileSync(join(РЕПО, '.qwen', 'agents', 'vydelitel.md'),
-  join(СТЕНД, '.qwen', 'agents', 'vydelitel.md'));
+// Позиция берётся ссылкой, а не копией.
+//
+// Первая редакция копировала. Копия отстала при первой же правке канона:
+// позиции добавили вторую обязанность, стенд продолжал работать по старому
+// определению, и приёмка молча проверяла не то, что объявлено. Обнаружено
+// проверкой, которая должна была отклонить — и приняла.
+//
+// Дисциплина «не забывать перепоставлять стенд» тут не годится: она такая же
+// норма в голове, как все прочие, которые за эти сутки срабатывали через раз.
+// Ссылка делает расхождение невозможным, а не маловероятным.
+const позиция = join(СТЕНД, '.qwen', 'agents', 'vydelitel.md');
+if (existsSync(позиция)) rmSync(позиция);
+symlinkSync(join(РЕПО, '.qwen', 'agents', 'vydelitel.md'), позиция);
 
 // Хуки — по абсолютному пути в репозиторий: стенд не должен держать их копию,
 // иначе разойдутся редакции, а следы лягут рядом с копией.
